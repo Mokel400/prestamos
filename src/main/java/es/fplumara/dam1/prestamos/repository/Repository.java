@@ -11,5 +11,5 @@ public interface Repository <T extends Identificable>{
     public void save(T elemento);
     public Optional<T> findById(String id);
     public List<T> listAll();
-    public void delete();
+    public void delete(String id);
 }

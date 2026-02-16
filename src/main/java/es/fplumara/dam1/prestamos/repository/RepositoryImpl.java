@@ -9,24 +9,25 @@ import java.util.Optional;
 
 public class RepositoryImpl <T extends Identificable> implements Repository<T>{
 
+    Map<String, T> datos = new HashMap<>();
 
     @Override
     public void save(T elemento) {
-
+        datos.put(elemento.getId(), elemento);
     }
 
     @Override
-    public Optional findById(String id) {
-        return Optional.empty();
+    public Optional<T> findById(String id) {
+        return Optional.ofNullable(datos.get(id));
     }
 
     @Override
-    public List listAll() {
-        return List.of();
+    public List<T> listAll() {
+        return List.of((T) datos.values());
     }
 
     @Override
-    public void delete() {
-
+    public void delete(String id) {
+        datos.remove(id);
     }
 }
