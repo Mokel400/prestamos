@@ -2,14 +2,12 @@ package es.fplumara.dam1.prestamos.repository;
 
 import es.fplumara.dam1.prestamos.model.Identificable;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public class RepositoryImpl <T extends Identificable> implements Repository<T>{
 
     Map<String, T> datos = new HashMap<>();
+    List<T> datosLista = datos.values().stream().toList();
 
     @Override
     public void save(T elemento) {
@@ -23,7 +21,7 @@ public class RepositoryImpl <T extends Identificable> implements Repository<T>{
 
     @Override
     public List<T> listAll() {
-        return List.of((T) datos.values());
+        return datosLista;
     }
 
     @Override
