@@ -6,6 +6,17 @@ import java.util.*;
 
 public class RepositoryImpl <T extends Identificable> implements Repository<T>{
 
+
+    private static RepositoryImpl instance;
+    private RepositoryImpl(){}
+    public static RepositoryImpl getInstance(){
+        if (instance == null){
+            instance = new RepositoryImpl();
+        }
+        return instance;
+    }
+
+
     Map<String, T> datos = new HashMap<>();
     List<T> datosLista = datos.values().stream().toList();
 
