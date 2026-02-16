@@ -2,6 +2,7 @@ package es.fplumara.dam1.prestamos.service;
 
 import es.fplumara.dam1.prestamos.exception.DuplicadoException;
 import es.fplumara.dam1.prestamos.exception.MaterialNoDisponibleException;
+import es.fplumara.dam1.prestamos.exception.NoEncontradoException;
 import es.fplumara.dam1.prestamos.model.EstadoMaterial;
 import es.fplumara.dam1.prestamos.model.Material;
 import es.fplumara.dam1.prestamos.repository.Repository;
@@ -20,6 +21,16 @@ public class MaterialService {
         }
         RepositoryImpl.getInstance().save(m);
     }
+
+    public void darDeBaja(String id){
+        if (RepositoryImpl.getInstance().findById(id) == null){
+            throw new NoEncontradoException("El material que busca no existe");
+        }
+        if (RepositoryImpl.getInstance().findById(id)){
+
+        }
+    }
+
 
 
 
