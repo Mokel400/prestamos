@@ -8,7 +8,9 @@ import es.fplumara.dam1.prestamos.model.Material;
 import es.fplumara.dam1.prestamos.repository.Repository;
 import es.fplumara.dam1.prestamos.repository.RepositoryImpl;
 
-public class MaterialService {
+import java.util.List;
+
+public class MaterialService extends RepositoryImpl<Material> {
 
 
     public void registrarMaterial(Material m) {
@@ -26,9 +28,11 @@ public class MaterialService {
         if (RepositoryImpl.getInstance().findById(id) == null){
             throw new NoEncontradoException("El material que busca no existe");
         }
-        if (RepositoryImpl.getInstance().findById(id)){
+        RepositoryImpl.getInstance().findById(id).
+    }
 
-        }
+    public List<Material> ListAll(){
+      return RepositoryImpl.getInstance().listAll();
     }
 
 

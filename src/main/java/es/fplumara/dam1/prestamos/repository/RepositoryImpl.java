@@ -8,7 +8,7 @@ public class RepositoryImpl <T extends Identificable> implements Repository<T>{
 
 
     private static RepositoryImpl instance;
-    private RepositoryImpl(){}
+    public RepositoryImpl(){}
     public static RepositoryImpl getInstance(){
         if (instance == null){
             instance = new RepositoryImpl();
