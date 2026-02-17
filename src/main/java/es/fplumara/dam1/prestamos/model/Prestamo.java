@@ -1,35 +1,36 @@
 package es.fplumara.dam1.prestamos.model;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
-public class Prestamo {
+public class Prestamo implements Identificable {
 
-    private String id;
-    private String idMaterial;
+    private UUID id;
+    private UUID idMaterial;
     private String Profesor;
     private LocalDate fecha;
 
 
-    public Prestamo(String id, String idMaterial, String profesor, LocalDate fecha) {
+    public Prestamo(UUID id, UUID idMaterial, String profesor, LocalDate fecha) {
         this.id = id;
         this.idMaterial = idMaterial;
         Profesor = profesor;
         this.fecha = fecha;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public String getIdMaterial() {
+    public UUID getIdMaterial() {
         return idMaterial;
     }
 
-    public void setIdMaterial(String idMaterial) {
+    public void setIdMaterial(UUID idMaterial) {
         this.idMaterial = idMaterial;
     }
 

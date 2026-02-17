@@ -1,24 +1,25 @@
 package es.fplumara.dam1.prestamos.model;
 
 import java.util.Set;
+import java.util.UUID;
 
-public abstract class Material {
+public abstract class Material implements Identificable{
 
 
-    private String id;
+    private UUID id;
     private String nombre;
     private EstadoMaterial estado;
     private Set<String> etiquetas;
 
 
-    public Material(String id, String nombre, EstadoMaterial estado, Set<String> etiquetas) {
+    public Material(UUID id, String nombre, EstadoMaterial estado, Set<String> etiquetas) {
         this.id = id;
         this.nombre = nombre;
         this.estado = estado;
         this.etiquetas = etiquetas;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -36,7 +37,7 @@ public abstract class Material {
 
     public abstract String getTipo();
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
