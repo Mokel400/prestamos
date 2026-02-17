@@ -1,38 +1,35 @@
 package es.fplumara.dam1.prestamos.service;
 
 import es.fplumara.dam1.prestamos.exception.DuplicadoException;
-import es.fplumara.dam1.prestamos.exception.MaterialNoDisponibleException;
 import es.fplumara.dam1.prestamos.exception.NoEncontradoException;
-import es.fplumara.dam1.prestamos.model.EstadoMaterial;
 import es.fplumara.dam1.prestamos.model.Material;
-import es.fplumara.dam1.prestamos.repository.Repository;
-import es.fplumara.dam1.prestamos.repository.RepositoryImpl;
+import es.fplumara.dam1.prestamos.repository.BaseRepositoryImpl;
 
 import java.util.List;
 
-public class MaterialService extends RepositoryImpl<Material> {
+public class MaterialService extends BaseRepositoryImpl<Material> {
 
 
     public void registrarMaterial(Material m) {
 
-        if (RepositoryImpl.getInstance().listAll().contains(m.getId())) {
+        if (BaseRepositoryImpl.getInstance().listAll().contains(m.getId())) {
             throw new DuplicadoException("Material con ese id ya existe");
         }
         if ((m == null) || (m.getId() == null) || (m.getId().isBlank()) || (m.getId().isEmpty())) {
             throw new IllegalArgumentException("Faltan datos");
         }
-        RepositoryImpl.getInstance().save(m);
+        BaseRepositoryImpl.getInstance().save(m);
     }
 
     public void darDeBaja(String id){
-        if (RepositoryImpl.getInstance().findById(id) == null){
+        if (BaseRepositoryImpl.getInstance().findById(id) == null){
             throw new NoEncontradoException("El material que busca no existe");
         }
-        RepositoryImpl.getInstance().findById(id).
+        BaseRepositoryImpl.getInstance().findById(id).
     }
 
     public List<Material> ListAll(){
-      return RepositoryImpl.getInstance().listAll();
+      return BaseRepositoryImpl.getInstance().listAll();
     }
 
 

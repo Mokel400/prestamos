@@ -4,14 +4,14 @@ import es.fplumara.dam1.prestamos.model.Identificable;
 
 import java.util.*;
 
-public class RepositoryImpl <T extends Identificable> implements Repository<T>{
+public class BaseRepositoryImpl<T extends Identificable> implements Repository<T>{
 
 
-    private static RepositoryImpl instance;
-    public RepositoryImpl(){}
-    public static RepositoryImpl getInstance(){
+    private static BaseRepositoryImpl instance;
+    public BaseRepositoryImpl(){}
+    public static BaseRepositoryImpl getInstance(){
         if (instance == null){
-            instance = new RepositoryImpl();
+            instance = new BaseRepositoryImpl();
         }
         return instance;
     }
