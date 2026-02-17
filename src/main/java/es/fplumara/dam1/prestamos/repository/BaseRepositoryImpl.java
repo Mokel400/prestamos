@@ -17,7 +17,7 @@ public class BaseRepositoryImpl<T extends Identificable> implements Repository<T
     }
 
 
-    Map<String, T> datos = new HashMap<>();
+    Map<UUID, T> datos = new HashMap<>();
     List<T> datosLista = datos.values().stream().toList();
 
     @Override
@@ -26,7 +26,7 @@ public class BaseRepositoryImpl<T extends Identificable> implements Repository<T
     }
 
     @Override
-    public Optional<T> findById(String id) {
+    public Optional<T> findById(UUID id) {
         Optional<T> idEncontrado = Optional.of(datos.get(id));
         return idEncontrado;
     }

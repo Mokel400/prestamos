@@ -10,6 +10,7 @@ import es.fplumara.dam1.prestamos.repository.MaterialRepositoryImpl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 public class MaterialService extends BaseRepositoryImpl<Material> {
 
@@ -19,13 +20,13 @@ public class MaterialService extends BaseRepositoryImpl<Material> {
         if (MaterialRepositoryImpl.getInstance().listAll().contains(m.getId())) {
             throw new DuplicadoException("Material con ese id ya existe");
         }
-        if ((m == null) || (m.getId() == null) || (m.getId().isBlank()) || (m.getId().isEmpty())) {
+        if ((m == null) || (m.getId() == null)) {
             throw new IllegalArgumentException("Faltan datos");
         }
         BaseRepositoryImpl.getInstance().save(m);
     }
 
-    public List<Material> darDeBaja(String id) {
+    public List<Material> darDeBaja(UUID id) {
         Optional<Material> mat = MaterialRepositoryImpl.getInstance().findById(id);
 
         if (MaterialRepositoryImpl.getInstance().findById(id) == null) {
