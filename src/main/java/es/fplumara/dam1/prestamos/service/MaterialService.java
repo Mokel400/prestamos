@@ -26,7 +26,7 @@ public class MaterialService extends BaseRepositoryImpl<Material> {
         BaseRepositoryImpl.getInstance().save(m);
     }
 
-    public List<Material> darDeBaja(UUID id) {
+    public List<Material> darDeBaja(String id) {
         Optional<Material> mat = MaterialRepositoryImpl.getInstance().findById(id);
 
         if (MaterialRepositoryImpl.getInstance().findById(id) == null) {

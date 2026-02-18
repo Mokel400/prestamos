@@ -5,41 +5,51 @@ import java.util.UUID;
 
 public class Prestamo implements Identificable {
 
-    private UUID id;
-    private UUID idMaterial;
-    private String Profesor;
+    private String id;
+    private String idMaterial;
+    private String profesor;
     private LocalDate fecha;
 
 
-    public Prestamo(UUID id, UUID idMaterial, String profesor, LocalDate fecha) {
+    public Prestamo(String id, String idMaterial, String profesor, LocalDate fecha) {
         this.id = id;
         this.idMaterial = idMaterial;
-        Profesor = profesor;
+        this.profesor = profesor;
         this.fecha = fecha;
     }
 
-    public UUID getId() {
+    @Override
+    public String toString() {
+        return "Prestamo{" +
+                "id='" + id + '\'' +
+                ", idMaterial='" + idMaterial + '\'' +
+                ", profesor='" + profesor + '\'' +
+                ", fecha=" + fecha +
+                '}';
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public UUID getIdMaterial() {
+    public String getIdMaterial() {
         return idMaterial;
     }
 
-    public void setIdMaterial(UUID idMaterial) {
+    public void setIdMaterial(String idMaterial) {
         this.idMaterial = idMaterial;
     }
 
     public String getProfesor() {
-        return Profesor;
+        return profesor;
     }
 
     public void setProfesor(String profesor) {
-        Profesor = profesor;
+        profesor = profesor;
     }
 
     public LocalDate getFecha() {

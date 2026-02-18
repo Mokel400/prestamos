@@ -17,7 +17,7 @@ public class PrestamoService extends BaseRepositoryImpl<Prestamo> {
 
 
 
-    public void crearPrestamo (UUID idMaterial, String profesor, LocalDate fecha){
+    public Prestamo crearPrestamo (String idMaterial, String profesor, LocalDate fecha){
         Optional<Material> mat = PrestamoRepositoryImpl.getInstance().findById(idMaterial);
 
         if (idMaterial == null | profesor == null | fecha == null){
@@ -29,13 +29,14 @@ public class PrestamoService extends BaseRepositoryImpl<Prestamo> {
         if (!mat.get().getEstado().equals(EstadoMaterial.DISPONIBLE)){
             throw new MaterialNoDisponibleException("El material solicitado no esta disponible");
         }
-        Prestamo pres = new Prestamo (UUID.randomUUID(), idMaterial, profesor, LocalDate.now());
+        Prestamo pres = new Prestamo (UUID.randomUUID().toString(), idMaterial, profesor, LocalDate.now());
         PrestamoRepositoryImpl.getInstance().save(pres);
         mat.get().setEstado(EstadoMaterial.PRESTADO);
         MaterialRepositoryImpl.getInstance().save(mat.get());
+        return pres;
     }
 
-    public void devolverMaterial (UUID idMaterial){
+    public void devolverMaterial (String idMaterial){
         Optional<Material> mat = PrestamoRepositoryImpl.getInstance().findById(idMaterial);
         if (idMaterial == null){
             throw new IllegalArgumentException("Faltan datos");
@@ -43,7 +44,7 @@ public class PrestamoService extends BaseRepositoryImpl<Prestamo> {
         if (PrestamoRepositoryImpl.getInstance().findById(idMaterial) == null){
             throw new NoEncontradoException("El material buscado no existe");
         }
-        if (mat.get().getEstado().equals(EstadoMaterial.PRESTADO)){
+        if (!mat.get().getEstado().equals(EstadoMaterial.PRESTADO)){
             throw new MaterialNoDisponibleException("El material no esta disponible para esta operacion");
         }
         mat.get().setEstado(EstadoMaterial.DISPONIBLE);
