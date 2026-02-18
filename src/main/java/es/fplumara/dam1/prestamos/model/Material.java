@@ -36,7 +36,7 @@ public abstract class Material implements Identificable{
 
     public abstract String getTipo();
 
-    public abstract int getExtra();
+    public abstract Integer getExtra();
 
     public void setId(String id) {
         this.id = id;
@@ -53,5 +53,4 @@ public abstract class Material implements Identificable{
     public void setEtiquetas(Set<String> etiquetas) {
         this.etiquetas = etiquetas;
     }
-
 }

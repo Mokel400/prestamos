@@ -41,7 +41,7 @@ public class PrestamoService extends BaseRepositoryImpl<Prestamo> {
         if (idMaterial == null){
             throw new IllegalArgumentException("Faltan datos");
         }
-        if (PrestamoRepositoryImpl.getInstance().findById(idMaterial) == null){
+        if (mat.isEmpty()){
             throw new NoEncontradoException("El material buscado no existe");
         }
         if (!mat.get().getEstado().equals(EstadoMaterial.PRESTADO)){

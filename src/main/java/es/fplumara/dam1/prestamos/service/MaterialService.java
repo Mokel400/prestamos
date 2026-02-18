@@ -20,7 +20,7 @@ public class MaterialService extends BaseRepositoryImpl<Material> {
         if (MaterialRepositoryImpl.getInstance().listAll().contains(m.getId())) {
             throw new DuplicadoException("Material con ese id ya existe");
         }
-        if ((m == null) || (m.getId() == null)) {
+        if (m.getId() == null) {
             throw new IllegalArgumentException("Faltan datos");
         }
         BaseRepositoryImpl.getInstance().save(m);

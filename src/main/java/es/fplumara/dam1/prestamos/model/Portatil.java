@@ -1,12 +1,10 @@
 package es.fplumara.dam1.prestamos.model;
 
 import java.util.Set;
-import java.util.UUID;
 
 public class Portatil extends Material{
 
-    private int ramGB;
-
+    private Integer ramGB;
 
     public Portatil(String id, String nombre, EstadoMaterial estado, Set<String> etiquetas) {
         super(id, nombre, estado, etiquetas);
@@ -33,7 +31,7 @@ public class Portatil extends Material{
                 '}';
     }
 
-    public int getExtra() {
+    public Integer getExtra() {
         return ramGB;
     }
 

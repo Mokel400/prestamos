@@ -1,11 +1,10 @@
 package es.fplumara.dam1.prestamos.model;
 
 import java.util.Set;
-import java.util.UUID;
 
 public class Proyector extends Material{
 
-    private int lumens;
+    private Integer lumens;
 
     public Proyector(String id, String nombre, EstadoMaterial estado, Set<String> etiquetas) {
         super(id, nombre, estado, etiquetas);
@@ -31,7 +30,7 @@ public class Proyector extends Material{
                 '}';
     }
 
-    public int getExtra() {
+    public Integer getExtra() {
         return lumens;
     }
 
