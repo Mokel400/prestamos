@@ -8,6 +8,7 @@ import es.fplumara.dam1.prestamos.model.Prestamo;
 import es.fplumara.dam1.prestamos.repository.BaseRepositoryImpl;
 import es.fplumara.dam1.prestamos.repository.MaterialRepositoryImpl;
 import es.fplumara.dam1.prestamos.repository.PrestamoRepositoryImpl;
+import es.fplumara.dam1.prestamos.repository.Repository;
 
 import java.time.LocalDate;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.UUID;
 public class PrestamoService extends BaseRepositoryImpl<Prestamo> {
 
 
+    public PrestamoService(){}
 
     public Prestamo crearPrestamo (String idMaterial, String profesor, LocalDate fecha){
         Optional<Material> mat = PrestamoRepositoryImpl.getInstance().findById(idMaterial);
