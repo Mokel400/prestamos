@@ -17,8 +17,8 @@ public class BaseRepositoryImpl<T extends Identificable> implements Repository<T
     }
 
 
-    Map<String, T> datos = new HashMap<>();
-    List<T> datosLista = datos.values().stream().toList();
+    public Map<String, T> datos = new HashMap<>();
+    public List<T> datosLista = datos.values().stream().toList();
 
     @Override
     public void save(T elemento) {

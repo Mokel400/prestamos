@@ -19,23 +19,24 @@ public class PrestamoService extends BaseRepositoryImpl<Prestamo> {
 
     public PrestamoService(){}
 
+    public PrestamoService(MaterialRepositoryImpl materialRepository, PrestamoRepositoryImpl prestamoRepository) {
+    }
+
     public Prestamo crearPrestamo (String idMaterial, String profesor, LocalDate fecha){
         Optional<Material> mat = PrestamoRepositoryImpl.getInstance().findById(idMaterial);
 
         if (idMaterial == null | profesor == null | fecha == null){
             throw new IllegalArgumentException("Faltan datos");
-        }
-        if (BaseRepositoryImpl.getInstance().findById(idMaterial).isEmpty()){
+        } else if (BaseRepositoryImpl.getInstance().findById(idMaterial).isEmpty()){
             throw new NoEncontradoException("El material buscado no existe");
-        }
-        if (!mat.get().getEstado().equals(EstadoMaterial.DISPONIBLE)){
+        } else if (!mat.get().getEstado().equals(EstadoMaterial.DISPONIBLE)){
             throw new MaterialNoDisponibleException("El material solicitado no esta disponible");
+        } else {
+            Prestamo pres = new Prestamo (UUID.randomUUID().toString(), idMaterial, profesor, LocalDate.now());
+            PrestamoRepositoryImpl.getInstance().save(pres);
+            mat.get().setEstado(EstadoMaterial.PRESTADO);
+            return pres;
         }
-        Prestamo pres = new Prestamo (UUID.randomUUID().toString(), idMaterial, profesor, LocalDate.now());
-        PrestamoRepositoryImpl.getInstance().save(pres);
-        mat.get().setEstado(EstadoMaterial.PRESTADO);
-        MaterialRepositoryImpl.getInstance().save(mat.get());
-        return pres;
     }
 
     public void devolverMaterial (String idMaterial){
@@ -47,7 +48,7 @@ public class PrestamoService extends BaseRepositoryImpl<Prestamo> {
             throw new NoEncontradoException("El material buscado no existe");
         }
         if (!mat.get().getEstado().equals(EstadoMaterial.PRESTADO)){
-            throw new MaterialNoDisponibleException("El material no esta disponible para esta operacion");
+            throw new MaterialNoDisponibleException("El material no esta disponible para esta operación");
         }
         mat.get().setEstado(EstadoMaterial.DISPONIBLE);
         PrestamoRepositoryImpl.getInstance().save(mat.get());

@@ -16,6 +16,8 @@ import org.mockito.Mock;
 import org.mockito.MockedStatic;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.junit.jupiter.MockitoSettings;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -37,42 +39,33 @@ class PrestamosServiceTest {
     // Requisito: usar mocks de repositorios y verify(...)
 
 
-    private MockedStatic<PrestamoRepositoryImpl> prestamoRepositoryStatic;
-    private MockedStatic<MaterialRepositoryImpl> materialRepositoryStatic;
-    private MockedStatic<BaseRepositoryImpl> baseRepositoryStatic;
+
 
     @Mock
-    private PrestamoRepositoryImpl prestamoRepository;
+    public MockedStatic<PrestamoRepositoryImpl> prestamoRepositoryStatic = mockStatic(PrestamoRepositoryImpl.class);
     @Mock
-    private MaterialRepositoryImpl materialRepository;
-    @Mock
-    private BaseRepositoryImpl baseRepostory;
+    public MockedStatic<MaterialRepositoryImpl> materialRepositoryStatic = mockStatic(MaterialRepositoryImpl.class);
+
+
+
 
     private PrestamoService prestamoService;
     @BeforeEach
     //Esto se utiliza para mockear una clase con un singleton
     void setUp(){
         prestamoService = new PrestamoService();
-
-        baseRepositoryStatic = Mockito.mockStatic(BaseRepositoryImpl.class);
-        baseRepositoryStatic.when(BaseRepositoryImpl::getInstance).thenReturn(baseRepostory);
-
     }
 
-    @AfterEach
-    void tearDown(){
-        baseRepositoryStatic.close();
-    }
+
 
     @Test
     void crearPrestamo_ok_cambiaEstado_y_guarda(){
-        Portatil nuevoPort;
-
-        when(materialRepository.findById("0001")).thenReturn(Optional.of(nuevoPort = new Portatil("0001", "Portatil 1000", EstadoMaterial.DISPONIBLE, new HashSet<>(), 16)));
+        Portatil nuevoPort = new Portatil("0001", "Portatil 1000", EstadoMaterial.DISPONIBLE, new HashSet<>(), 16);
+        when(materialRepositoryStatic.findById("0001")).thenReturn(Optional.of(nuevoPort));
         prestamoService.crearPrestamo("0001", "Mikel", LocalDate.now());
         verify(PrestamoRepositoryImpl.getInstance()).save(any());
         assertEquals(EstadoMaterial.PRESTADO, nuevoPort.getEstado());
-        verify(materialRepository).save(nuevoPort);
+        materialRepositoryStatic.when()
     }
 
 
